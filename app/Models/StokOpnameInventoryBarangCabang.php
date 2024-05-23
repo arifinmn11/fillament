@@ -31,4 +31,5 @@ class StokOpnameInventoryBarangCabang extends Model
     {
         return $this->belongsTo(User::class, 'user_catat_id');
     }
+
 }

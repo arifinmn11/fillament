@@ -2,11 +2,13 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Exports\StokOpnameInventoryBarangCabangExport;
 use App\Filament\Admin\Resources\StokOpnameInventoryBarangCabangResource\Pages;
 use App\Filament\Admin\Resources\StokOpnameInventoryBarangCabangResource\RelationManagers;
 use App\Models\Cabang;
 use App\Models\InventoryBarangCabang;
 use App\Models\StokOpnameInventoryBarangCabang;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
@@ -19,6 +21,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class StokOpnameInventoryBarangCabangResource extends Resource
 {
@@ -41,17 +44,6 @@ class StokOpnameInventoryBarangCabangResource extends Resource
     {
         return $form
             ->schema([
-                // Select::make('cabang_id')
-                //     ->label('Cabang')
-                //     ->options(Cabang::all()->pluck('nama', 'id'))
-                //     ->searchable()
-                //     ->required()
-                // ->reactive()
-                // ->afterStateUpdated(fn ($state, callable $set) =>
-                // [
-                //         $set('inv_barang_cabang_id', $set('cabang_id') ? ),
-                //         $set('cabang_id', $state),
-                //     ]),
                 Select::make('inv_barang_cabang_id')
                     ->label('Inventory Barang Cabang')
                     ->options(function (callable $get) {
@@ -134,6 +126,11 @@ class StokOpnameInventoryBarangCabangResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->headerActions([
+                ExportAction::make()->exports([
+                    ExcelExport::make()->fromTable()
+                ])
             ]);
     }
 
