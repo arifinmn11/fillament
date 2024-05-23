@@ -13,6 +13,12 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Select;
 use App\Models\Cabang;
 use Filament\Support\RawJs;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Mu;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 
 class SumberDanaResource extends Resource
 {
@@ -69,9 +75,23 @@ class SumberDanaResource extends Resource
                     ->label('Dibuat Pada')
                     ->date(),
             ])
-            ->filters([])
+            ->filters([
+                SelectFilter::make('cabang')
+                    ->label('Cabang')
+                    ->relationship('cabang', 'nama')
+                    ->options(Cabang::all()->pluck('nama', 'id'))
+                    ->placeholder('All Cabangs')
+                    ->searchable()
+                    ->multiple(),
+                DateRangeFilter::make('created_at'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()->exports([
+                    ExcelExport::make()->fromTable()
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
