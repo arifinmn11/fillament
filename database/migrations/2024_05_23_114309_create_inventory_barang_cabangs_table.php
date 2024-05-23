@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('stok')->default(0);
             $table->decimal('harga_beli', 12, 2)->default(0);
             $table->decimal('harga_jual', 12, 2)->default(0);
-            $table->decimal('laba', 12, 2)->default(0);
-            $table->boolean('is_laba_fleksibel')->default(false);
+            // $table->decimal('laba', 12, 2)->default(0);
+            // $table->boolean('is_laba_fleksibel')->default(false);
             $table->timestamps();
         });
     }

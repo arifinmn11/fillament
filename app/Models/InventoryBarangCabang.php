@@ -17,8 +17,8 @@ class InventoryBarangCabang extends Model
         'stok',
         'harga_beli',
         'harga_jual',
-        'laba',
-        'is_laba_fleksibel',
+        // 'laba',
+        // 'is_laba_fleksibel',
     ];
 
     public function inventory_barang()

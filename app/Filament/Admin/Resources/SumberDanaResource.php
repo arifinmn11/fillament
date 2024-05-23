@@ -41,7 +41,8 @@ class SumberDanaResource extends Resource
                 TextInput::make('saldo')
                     ->mask(RawJs::make('$money($input)'))
                     ->stripCharacters(',')
-                    ->numeric()->required(),
+                    ->numeric()
+                    ->required(),
                 Select::make('cabang_id')
                     ->label('Cabang')
                     ->options(Cabang::query()->orderBy('nama')->pluck('nama', 'id'))
@@ -76,7 +77,7 @@ class SumberDanaResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->paginated();
     }
     public static function getRelations(): array
     {

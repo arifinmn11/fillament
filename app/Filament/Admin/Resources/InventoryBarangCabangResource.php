@@ -15,8 +15,8 @@ use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rule;
+
 
 class InventoryBarangCabangResource extends Resource
 {
@@ -47,18 +47,17 @@ class InventoryBarangCabangResource extends Resource
                     ->label('Cabang')
                     ->relationship('cabang', 'nama')
                     ->required(),
-
-                Radio::make('is_laba_fleksibel')
-                    ->label('Laba Fleksibel')
-                    ->boolean()
-                    ->default(false)
-                    ->reactive()
-                    ->required()
-                    ->columnSpanFull()
-                    ->afterStateUpdated(fn ($state, callable $set) => ([
-                        $set('harga_beli', $state ? null : ''),
-                        $set('harga_jual', $state ? null : ''),
-                    ])),
+                // Radio::make('is_laba_fleksibel')
+                //     ->label('Laba Fleksibel')
+                //     ->boolean()
+                //     ->default(false)
+                //     ->reactive()
+                //     ->required()
+                // ->columnSpanFull()
+                // ->afterStateUpdated(fn ($state, callable $set) => ([
+                //     $set('harga_beli', $state ? null : ''),
+                //     $set('harga_jual', $state ? null : ''),
+                // ])),
                 TextInput::make('stok')
                     ->label('Stok')
                     ->numeric()
@@ -68,19 +67,19 @@ class InventoryBarangCabangResource extends Resource
                     ->mask(RawJs::make('$money($input)'))
                     ->stripCharacters(',')
                     ->numeric()
-                    ->required()
-                    ->hidden(fn ($get) => $get('is_laba_fleksibel')),
+                    ->required(),
+                // ->hidden(fn ($get) => $get('is_laba_fleksibel')),
                 TextInput::make('harga_jual')
                     ->mask(RawJs::make('$money($input)'))
                     ->stripCharacters(',')
                     ->numeric()
-                    ->required()
-                    ->hidden(fn ($get) => $get('is_laba_fleksibel')),
-                TextInput::make('laba')
-                    ->mask(RawJs::make('$money($input)'))
-                    ->stripCharacters(',')
-                    ->numeric()
                     ->required(),
+                // ->hidden(fn ($get) => $get('is_laba_fleksibel')),
+                // TextInput::make('laba')
+                //     ->mask(RawJs::make('$money($input)'))
+                //     ->stripCharacters(',')
+                //     ->numeric()
+                //     ->required(),
             ]);
     }
 
@@ -90,11 +89,8 @@ class InventoryBarangCabangResource extends Resource
             ->columns([
                 TextColumn::make('inventory_barang.nama')->sortable()->searchable(),
                 TextColumn::make('cabang.nama')->sortable()->searchable(),
-                TextColumn::make('is_laba_fleksibel')->sortable()->searchable(),
-                TextColumn::make('stok')->sortable(),
-                TextColumn::make('harga_beli')->sortable(),
-                TextColumn::make('harga_jual')->sortable(),
-                TextColumn::make('laba')->sortable(),
+                TextColumn::make('harga_beli')->money(currency: 'IDR')->sortable(),
+                TextColumn::make('harga_jual')->money(currency: 'IDR')->sortable(),
             ])
             ->filters([
                 //

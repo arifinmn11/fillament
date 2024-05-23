@@ -16,4 +16,5 @@ class ListCabangs extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
 }

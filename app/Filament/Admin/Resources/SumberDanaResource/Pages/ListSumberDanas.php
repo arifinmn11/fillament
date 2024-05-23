@@ -16,4 +16,9 @@ class ListSumberDanas extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getTableRecordsPerPageSelectOptions(): ?array
+    {
+        return [5, 10, 25, 50, 100];
+    }
 }

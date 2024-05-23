@@ -57,6 +57,7 @@ class StokOpnameSumberDanaResource extends Resource
                     ->required(),
                 DateTimePicker::make('tgl_transaksi')
                     ->label('Tanggal Transaksi')
+                    ->default(now())
                     ->required(),
                 Textarea::make('keterangan')->label('Keterangan'),
             ]);
