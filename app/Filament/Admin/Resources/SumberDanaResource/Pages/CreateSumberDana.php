@@ -9,4 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateSumberDana extends CreateRecord
 {
     protected static string $resource = SumberDanaResource::class;
+
+    // public function mount(): void
+    // {
+    // }
 }
