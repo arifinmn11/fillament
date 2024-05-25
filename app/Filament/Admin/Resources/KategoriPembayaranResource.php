@@ -24,6 +24,16 @@ class KategoriPembayaranResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $modelLabel = 'Kategori Pembayaran';
+
+    protected static ?string $pluralModelLabel = 'Kategori Pembayaran';
+
+    protected static ?string $navigationLabel = 'Kategori Pembayaran';
+
+    protected static ?string $navigationGroup = 'Master Data';
+
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form

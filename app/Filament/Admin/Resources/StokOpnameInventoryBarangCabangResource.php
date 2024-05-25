@@ -37,7 +37,7 @@ class StokOpnameInventoryBarangCabangResource extends Resource
 
     protected static ?string $navigationGroup = 'Stok Opname';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 8;
 
 
     public static function form(Form $form): Form

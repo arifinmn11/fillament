@@ -32,7 +32,7 @@ class InventoryBarangCabangResource extends Resource
 
     protected static ?string $navigationGroup = 'Master Data';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 5;
 
 
     public static function form(Form $form): Form
