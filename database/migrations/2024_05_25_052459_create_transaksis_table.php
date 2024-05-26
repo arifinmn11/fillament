@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
             $table->timestamp('tgl_transaksi');
-            $table->string('no_transaksi');
+            $table->string('no_transaksi')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('cabang_id')->constrained('cabang');
-            $table->foreignId('sumber_dana_id')->constrained('sumber_dana')->nullable();
-            $table->foreignId('inv_barang_cabang_id')->constrained('inventory_barang_cabang')->nullable();
+            $table->foreignId('sumber_dana_id')->nullable()->constrained('sumber_dana');
+            $table->foreignId('inv_barang_cabang_id')->nullable()->constrained('inventory_barang_cabang');
             $table->string('keterangan')->nullable();
             $table->boolean('is_sumber_dana')->default(false);
             $table->timestamps();
