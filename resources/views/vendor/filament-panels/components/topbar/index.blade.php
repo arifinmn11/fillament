@@ -29,14 +29,29 @@ $default = App\Models\Cabang::find(Auth::user()->cabang_id);
                     @endforeach
                 </x-filament::input.select>
             </form>
-            <div x-data="{ toggle: function (event) { $refs.panel.toggle(event) }, open: function (event) { $refs.panel.open(event) }, close: function (event) { $refs.panel.close(event) } }" class="fi-dropdown fi-user-menu">
-                <div x-on:click="toggle" class="fi-dropdown-trigger flex cursor-pointer">
-                    <button aria-label="User menu" type="button" class="shrink-0">
-                        <img class="fi-avatar object-cover object-center fi-circular rounded-full h-8 w-8 fi-user-avatar" src="https://ui-avatars.com/api/?name=T+U&amp;color=FFFFFF&amp;background=09090b">
-                    </button>
-                </div>
-                <div x-float.placement.bottom-end.flip.teleport.offset="{ offset: 8 }" x-ref="panel" x-transition:enter-start="opacity-0" x-transition:leave-end="opacity-0" class="fi-dropdown-panel absolute z-10 w-screen divide-y divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-gray-950/5 transition dark:divide-white/5 dark:bg-gray-900 dark:ring-white/10 max-w-[14rem]" style="position: fixed; display: block; left: 1424px; top: 56px;">
-                    <!-- User menu content -->
+            <div x-data="{ open: false }" class="fi-dropdown fi-user-menu">
+                <button @click="open = !open" class="fi-dropdown-trigger flex items-center">
+                    <img class="fi-avatar object-cover object-center fi-circular rounded-full h-8 w-8 fi-user-avatar" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=FFFFFF&background=09090b">
+                </button>
+                <div x-show="open" @click.away="open = false" class="fi-dropdown-panel absolute z-10 w-48 divide-y divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-gray-950/5 transition dark:divide-white/5 dark:bg-gray-900 dark:ring-white/10">
+                    <div class="p-4">
+                        <p class="text-sm text-gray-700 dark:text-white">{{ Auth::user()->name }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ Auth::user()->email }}</p>
+                    </div>
+                    <ul class="py-1">
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800">Profile</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800">Settings</a>
+                        </li>
+                        <li>
+                            <form action="/admin/logout" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
+                                <button type="submit" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800">Sign out</button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -44,4 +59,6 @@ $default = App\Models\Cabang::find(Auth::user()->cabang_id);
 </div>
 
 <script>
+
+
 </script>

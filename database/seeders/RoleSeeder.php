@@ -14,20 +14,20 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
 
-        // Create roles
+        // // Create roles
         $superAdmin = Role::create(['name' => 'super admin']);
-        $adminRole = Role::create(['name' => 'admin']);
-        $pegawaiRole = Role::create(['name' => 'pegawai']);
+        // $adminRole = Role::create(['name' => 'admin']);
+        // $pegawaiRole = Role::create(['name' => 'pegawai']);
 
-        // Create permissions
-        $manageUsersPermission = Permission::create(['name' => 'manage users']);
-        $viewReportsPermission = Permission::create(['name' => 'view reports']);
+        // // Create permissions
+        // $manageUsersPermission = Permission::create(['name' => 'manage users']);
+        // $viewReportsPermission = Permission::create(['name' => 'view reports']);
 
-        // Assign permissions to roles
-        $superAdmin->givePermissionTo($manageUsersPermission);
-        $superAdmin->givePermissionTo($viewReportsPermission);
-        $adminRole->givePermissionTo($manageUsersPermission);
-        $adminRole->givePermissionTo($viewReportsPermission);
-        // $pegawaiRole->givePermissionTo($viewReportsPermission);
+        // // Assign permissions to roles
+        // $superAdmin->givePermissionTo($manageUsersPermission);
+        // $superAdmin->givePermissionTo($viewReportsPermission);
+        // $adminRole->givePermissionTo($manageUsersPermission);
+        // $adminRole->givePermissionTo($viewReportsPermission);
+        // // $pegawaiRole->givePermissionTo($viewReportsPermission);
     }
 }

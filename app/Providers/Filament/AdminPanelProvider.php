@@ -2,8 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use App\Filament\Auth\Login;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -22,11 +22,13 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
+
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->id('admin')
             ->path('admin')
+            // ->login()
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
@@ -55,6 +57,8 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->plugin(FilamentSpatieRolesPermissionsPlugin::make());
+            ->plugins([
+                FilamentShieldPlugin::make()
+            ]);
     }
 }

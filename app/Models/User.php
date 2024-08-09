@@ -3,14 +3,20 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
+// implements FilamentUser
 {
     use HasFactory, Notifiable, HasRoles;
+    // use HasPanelShield;
 
     /**
      * The attributes that are mass assignable.
@@ -45,10 +51,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function cabang()
-    {
-        return $this->belongsTo(Cabang::class);
     }
 }
